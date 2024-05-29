@@ -35,7 +35,7 @@ public class LegendaryBoots implements ModInitializer {
             if (Registries.ITEM.getId(itemStack.getItem()).toString().equals("minecraft:feather") && itemStack.get(DataComponentTypes.CUSTOM_DATA) != null) {
                 NbtCompound nbt = itemStack.get(DataComponentTypes.CUSTOM_DATA).copyNbt();
                 if (nbt.contains("legendary_feather")) {
-                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 60, 0, false, false, false));
+                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 60, 0, false, true, false));
                 }
             }
         }
@@ -46,7 +46,7 @@ public class LegendaryBoots implements ModInitializer {
             if(Registries.ITEM.getId(itemStack.getItem()).toString().equals("minecraft:diamond_boots") && itemStack.get(DataComponentTypes.CUSTOM_DATA) != null){
                 NbtCompound nbt = itemStack.get(DataComponentTypes.CUSTOM_DATA).copyNbt();
                 if(nbt.contains("legendary_boots")){
-                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 60, 3, false, false, false));
+                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 60, 4, false, true, false));
                 }
             }
         }
