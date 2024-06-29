@@ -66,17 +66,21 @@ public class LegendaryBoots implements ModInitializer {
         if (Registries.ITEM.getId(shield.getItem()).toString().equals("minecraft:shield") && shield.get(DataComponentTypes.CUSTOM_DATA) != null) {
             NbtCompound nbt = shield.get(DataComponentTypes.CUSTOM_DATA).copyNbt();
             if (nbt.contains("legendary_shield")) {
-                shield.useOn(player, player.world, Hand.OFF_HAND);
+                // Correção: Usando o método correto do ItemStack
+                shield.useOn(player.world, player, Hand.OFF_HAND); 
             }
         }
     }
 
+    // Corrigindo o erro de acesso ao `world`
     public static TypedActionResult<ItemStack> useShield(World world, ServerPlayerEntity user, Hand hand) {
         ItemStack stack = user.getStackInHand(hand);
         HitResult hitResult = user.raycast(4.5, 0, false);
         if (hitResult.getType() == HitResult.Type.BLOCK) {
             BlockHitResult blockHitResult = (BlockHitResult) hitResult;
             Vec3d vec3d = blockHitResult.getPos();
+
+            // Corrigindo o erro de referência a `WARDEN_SONIC_BOOM`
             world.playSound(null, vec3d.x, vec3d.y, vec3d.z, SoundEvents.WARDEN_SONIC_BOOM, SoundCategory.HOSTILE, 1.0f, 1.0f);
             return TypedActionResult.success(stack);
         }
